@@ -109,6 +109,22 @@ body {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
+.square.winning-square {
+  background: #28a745 !important;
+  color: white !important;
+  border-color: #1e7e34 !important;
+  animation: winnerGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes winnerGlow {
+  0% { 
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+  }
+  100% { 
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.8);
+  }
+}
+
 .square:last-child {
   margin-right: 0;
 }
