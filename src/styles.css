@@ -33,13 +33,40 @@ body {
 /* Game Layout */
 .game {
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  gap: 20px;
   background: white;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  max-width: 800px;
+  max-width: 1000px;
   width: 100%;
+}
+
+.game-controls {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.game-controls label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.game-controls select {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 2px solid #dee2e6;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.game-main {
+  display: flex;
+  gap: 40px;
 }
 
 .game-board {
@@ -56,6 +83,10 @@ body {
 }
 
 /* Board Styles */
+.board {
+  display: inline-block;
+}
+
 .status {
   font-size: 1.3rem;
   font-weight: bold;
@@ -70,6 +101,7 @@ body {
 
 .board-row {
   display: flex;
+  clear: both;
 }
 
 .board-row:not(:last-child) {
@@ -80,12 +112,8 @@ body {
 .square {
   background: #fff;
   border: 3px solid #dee2e6;
-  float: left;
-  font-size: 3rem;
   font-weight: bold;
   line-height: 1;
-  height: 80px;
-  width: 80px;
   margin-right: 4px;
   margin-bottom: 4px;
   padding: 0;
@@ -94,6 +122,14 @@ body {
   border-radius: 8px;
   transition: all 0.2s ease;
   color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Dynamic sizing based on board size */
+  width: calc(max(40px, 320px / var(--board-size, 3)));
+  height: calc(max(40px, 320px / var(--board-size, 3)));
+  font-size: calc(max(1rem, 120px / var(--board-size, 3)));
 }
 
 .square:hover {
