@@ -22,7 +22,7 @@ function Board({ xIsNext, squares, onPlay }) {
     } else {
       nextSquares[i] = 'O';
     }
-    onPlay(nextSquares);
+    onPlay(nextSquares, i);
   }
 
   const winnerInfo = calculateWinner(squares);
@@ -67,14 +67,17 @@ function Board({ xIsNext, squares, onPlay }) {
 
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [moveLocations, setMoveLocations] = useState([null]); // Track move locations
   const [currentMove, setCurrentMove] = useState(0);
   const [isAscending, setIsAscending] = useState(true);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
-  function handlePlay(nextSquares) {
+  function handlePlay(nextSquares, squareIndex) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    const nextMoveLocations = [...moveLocations.slice(0, currentMove + 1), squareIndex];
     setHistory(nextHistory);
+    setMoveLocations(nextMoveLocations);
     setCurrentMove(nextHistory.length - 1);
   }
 
@@ -86,19 +89,28 @@ export default function Game() {
     setIsAscending(!isAscending);
   }
 
+  function getLocationString(squareIndex) {
+    if (squareIndex === null) return '';
+    const row = Math.floor(squareIndex / 3) + 1; // 1-based indexing
+    const col = (squareIndex % 3) + 1; // 1-based indexing
+    return ` (${row}, ${col})`;
+  }
+
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
-      description = 'Go to move #' + move;
+      const locationString = getLocationString(moveLocations[move]);
+      description = 'Go to move #' + move + locationString;
     } else {
       description = 'Go to game start';
     }
     
     // For the current move, show text instead of a button
     if (move === currentMove) {
+      const locationString = move > 0 ? getLocationString(moveLocations[move]) : '';
       return (
         <li key={move}>
-          You are at move #{move}
+          You are at move #{move}{locationString}
         </li>
       );
     }
