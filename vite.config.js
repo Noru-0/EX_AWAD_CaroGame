@@ -6,7 +6,18 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    open: true
+    open: true,
+    host: true
+  },
+  preview: {
+    port: 4173,
+    host: true,
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      '*.onrender.com',
+      'ex-awad-carogame.onrender.com'
+    ]
   },
   build: {
     outDir: 'dist',
