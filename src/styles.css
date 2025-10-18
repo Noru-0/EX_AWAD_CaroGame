@@ -1,0 +1,220 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Game Layout */
+.game {
+  display: flex;
+  gap: 40px;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  width: 100%;
+}
+
+.game-board {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-info {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Board Styles */
+.status {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+}
+
+.board-row {
+  display: flex;
+}
+
+.board-row:not(:last-child) {
+  margin-bottom: 4px;
+}
+
+/* Square Styles */
+.square {
+  background: #fff;
+  border: 3px solid #dee2e6;
+  float: left;
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1;
+  height: 80px;
+  width: 80px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: #495057;
+}
+
+.square:hover {
+  background: #f8f9fa;
+  border-color: #6c757d;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.square:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.square:last-child {
+  margin-right: 0;
+}
+
+/* Game Info Styles */
+.game-info h2 {
+  margin-bottom: 15px;
+  color: #495057;
+  font-size: 1.5rem;
+}
+
+.game-info ol {
+  list-style: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.game-info li {
+  margin-bottom: 8px;
+}
+
+.game-info button {
+  background: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.game-info button:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.game-info button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .game {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .game-info {
+    flex: none;
+  }
+  
+  .square {
+    height: 60px;
+    width: 60px;
+    font-size: 2rem;
+  }
+  
+  .status {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .app h1 {
+    font-size: 1.5rem;
+  }
+  
+  .square {
+    height: 50px;
+    width: 50px;
+    font-size: 1.5rem;
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+  
+  .game {
+    padding: 15px;
+  }
+}
+
+/* Winner Animation */
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.status:has-text("Winner") {
+  animation: celebrate 0.5s ease-in-out;
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+  border-color: #28a745;
+}
