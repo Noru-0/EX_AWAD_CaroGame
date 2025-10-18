@@ -28,12 +28,19 @@ function Board({ xIsNext, squares, onPlay, boardSize }) {
   const winnerInfo = calculateWinner(squares, boardSize);
   const winningLine = winnerInfo ? winnerInfo.line : [];
   let status;
+  let statusClass = '';
+  
   if (winnerInfo) {
-    status = 'Winner: ' + winnerInfo.winner;
+    status = `🎉 Winner: ${winnerInfo.winner} 🎉`;
+    statusClass = 'status-winner';
   } else if (squares.every(square => square !== null)) {
-    status = 'Draw: No winner!';
+    status = '🤝 Draw: No winner! 🤝';
+    statusClass = 'status-draw';
   } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+    const playerSymbol = xIsNext ? 'X' : 'O';
+    const playerName = xIsNext ? 'Player 1' : 'Player 2';
+    status = `${playerSymbol} ${playerName}'s turn`;
+    statusClass = xIsNext ? 'status-player-x' : 'status-player-o';
   }
 
   const boardRows = [];
@@ -59,7 +66,7 @@ function Board({ xIsNext, squares, onPlay, boardSize }) {
 
   return (
     <>
-      <div className="status">{status}</div>
+      <div className={`status ${statusClass}`}>{status}</div>
       <div 
         className="board" 
         style={{'--board-size': boardSize}}
