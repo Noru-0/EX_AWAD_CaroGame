@@ -75,6 +75,16 @@ export default function Game() {
     } else {
       description = 'Go to game start';
     }
+    
+    // For the current move, show text instead of a button
+    if (move === currentMove) {
+      return (
+        <li key={move}>
+          You are at move #{move}
+        </li>
+      );
+    }
+    
     return (
       <li key={move}>
         <button onClick={() => jumpTo(move)}>{description}</button>
